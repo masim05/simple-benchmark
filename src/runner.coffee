@@ -4,7 +4,7 @@ _ = require 'lodash'
 
 index = require './index.coffee'
 
-ITERATIONS_TOTAL = 1000
+ITERATIONS_TOTAL = 10000
 
 routines = []
 durations = {}
