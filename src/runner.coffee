@@ -17,7 +17,7 @@ durator = (callback) ->
     action (error) ->
         [ends, endns] = process.hrtime()
 
-        duration = (ends - starts) * 1000 * 1000 * 1000 + endns - startns
+        duration = parseInt ((ends - starts) * 1000 * 1000 * 1000 + endns - startns) / 1000
 
         switch key
             when 'prolog' then space = durations
@@ -57,8 +57,9 @@ async.series routines, (error) ->
 
     times = _.filter(durations.actions, (value) -> !value.error).map (e) -> e.duration
 
-    s = new Stats().push times
+    s = new Stats().push(times).iqr()
 
-    console.log 'mean: ', parseInt (s.amean() / 1000)
-    console.log 'median: ', parseInt (s.median() / 1000)
-    console.log 'stdev: ', parseInt (s.stddev() / 1000)
+    #console.log t for t, i in times when (i % 10) == 0
+    console.log 'mean: ', parseInt s.amean()
+    console.log 'median: ', parseInt s.median()
+    console.log 'stdev: ', parseInt s.stddev()
