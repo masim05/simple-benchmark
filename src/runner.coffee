@@ -4,7 +4,7 @@ _ = require 'lodash'
 
 index = require './index.coffee'
 
-ITERATIONS_TOTAL = 100
+ITERATIONS_TOTAL = 1000
 
 routines = []
 durations = {}
@@ -12,10 +12,12 @@ durations = {}
 durator = (callback) ->
     {key, action} = @
 
-    start = new Date()
+    [starts, startns] = process.hrtime()
 
     action (error) ->
-        duration = new Date() - start
+        [ends, endns] = process.hrtime()
+
+        duration = (ends - starts) * 1000 * 1000 * 1000 + endns - startns
 
         switch key
             when 'prolog' then space = durations
@@ -57,6 +59,6 @@ async.series routines, (error) ->
 
     s = new Stats().push times
 
-    console.log 'mean: ', s.amean().toFixed 2
-    console.log 'median: ', s.median().toFixed 2
-    console.log 'stdev: ', s.stddev().toFixed 2
+    console.log 'mean: ', parseInt (s.amean() / 1000)
+    console.log 'median: ', parseInt (s.median() / 1000)
+    console.log 'stdev: ', parseInt (s.stddev() / 1000)
