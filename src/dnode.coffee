@@ -11,7 +11,7 @@ response = fs.readFileSync path.join __dirname, './response.json'
 
 server = dnode
     ping: (callback) ->
-        console.log new Date() unless (count++ % 5000)
+        console.log new Date() unless (count++ % 1000)
         callback null, response
 
 server.listen SERVER_PORT, -> console.log "listening #{SERVER_PORT}"
