@@ -1,8 +1,9 @@
 async = require 'async'
 Stats = require('fast-stats').Stats
 _ = require 'lodash'
+path = require 'path'
 
-index = require './index.coffee'
+index = require path.join process.cwd(), process.argv[2]
 
 ITERATIONS_TOTAL = 10000
 
