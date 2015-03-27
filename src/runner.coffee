@@ -5,7 +5,7 @@ path = require 'path'
 
 index = require path.join process.cwd(), process.argv[2]
 
-ITERATIONS_TOTAL = 10000
+ITERATIONS_TOTAL = 1000
 
 routines = []
 durations = {}
