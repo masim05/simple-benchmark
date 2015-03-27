@@ -1,0 +1,36 @@
+{
+  "provider": "ProverennyMATest",
+  "provider.availability": "availability://vr.prep:ru.infodoctor@production/search?id=ProverennyMATest",
+  "patient.creation.targets": {
+    "infoclinic": {
+      "address": "appointment://infoclinic.doctor:ru.msk.medsi@production?doctor=20000582",
+      "steps": {"aliases": ["patient"]}
+    }
+  },
+  "provider.provisioning.targets": {
+    "vr": {
+      "address": "appointment://vr.prep:ru.infodoctor@production?id=ProverennyMATest",
+      "parameters": {
+        "wish": {"providers": [{"id": "ProverennyMATest"}]},
+        "notify": {
+          "client": false,
+          "provider": true
+        }
+      },
+      "steps": {"aliases": ["order"]}
+    },
+    "infoclinic": {
+      "address": "appointment://infoclinic.doctor:ru.msk.medsi@production?doctor=20000582",
+      "steps": {
+        "aliases": [
+          "reserve",
+          "confirm"
+        ]
+      }
+    }
+  },
+  "provider.name": "Проверенный Михаил Алексеевич",
+  "provider.phone": "+7(929) 611-11-11",
+  "provider.photo.protocols": ["http"],
+  "provider.description": "Аллерголог."
+}
